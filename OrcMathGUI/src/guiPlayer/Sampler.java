@@ -14,6 +14,7 @@ import guiTeacher.components.*;
 import guiTeacher.interfaces.KeyedComponent;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
+import jessi.CandyBars;
 
 public class Sampler extends GUIApplication {
 
@@ -119,7 +120,7 @@ public class Sampler extends GUIApplication {
 				}
 			}); 
 			viewObjects.add(cb);
-			viewObjects.add(new Pac);
+			viewObjects.add (new CandyBars());
 			
 		}
 		
