@@ -9,11 +9,10 @@ import guiTeacher.components.Component;
 public class CandyBars extends AnimatedComponent {
 	
 	String name;
-	int width;
-	int height;
+	double price;
 	
 
-	public CandyBars(String name, int width, int height) {
+	public CandyBars(String name, double price) {
 		super(40, 40, 6144, 512);
 		addSequence("resources/spritesheet.png", 100, 0, 0, 50, 60, 5);
 		Thread animation = new Thread(this);
@@ -31,7 +30,7 @@ public class CandyBars extends AnimatedComponent {
 	}
 
 	public String toString() {
-		return name+","+width+","+height;
+		return name+","+price;
 	}
 }
 
