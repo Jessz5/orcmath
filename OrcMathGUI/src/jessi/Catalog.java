@@ -17,11 +17,9 @@ public class Catalog {
 	public static void main(String[] args) {
 		Catalog maker = new Catalog();
 		while(true) {
-			System.out.println(maker.getCSVContent());
 			maker.addCandy();
-	
+			System.out.println(maker.getCSVContent());
 		}
-		//maker.addCandy();
 	}
 	
 	public void addCandy() {
