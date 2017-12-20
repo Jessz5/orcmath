@@ -23,7 +23,7 @@ public class CandyBars extends Component {
 	public void update(Graphics2D g) {
 		//g.setColor(Color.blue);
 		//g.fillRect(0, 0, getWidth(), getHeight());
-		//super.update(g);
+		//super..update(g);
 	}
 
 	public String toString() {
