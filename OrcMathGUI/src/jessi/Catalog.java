@@ -1,5 +1,7 @@
 package jessi;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -7,7 +9,7 @@ import java.util.Scanner;
 public class Catalog {
 
 	private static ArrayList<CandyBars> candyList; 
-	
+
 	public Catalog() {
 		candyList = new ArrayList<CandyBars>(); 
 		candyList.add(new CandyBars("Twix", 0.75));
@@ -20,6 +22,7 @@ public class Catalog {
 			maker.addCandy();
 			System.out.println(maker.getCSVContent());
 		}
+		//save(s);
 	}
 	
 	public void addCandy() {
@@ -41,5 +44,16 @@ public class Catalog {
 		}
 		return data;
 	
+	}
+	
+	public void save(String fileContent) {
+		try{    
+			 FileWriter fw=new FileWriter("text.csv");    
+			 fw.write(fileContent);
+			 fw.close();    
+			 System.out.println("Success! File \""+"text.csv"+"\" saved!");
+		 }catch(IOException e){
+			 System.out.println("An IOException was thrown. \nCheck to see that the directory where you tried to save the file actually exists.");
+		 }
 	}
 }
