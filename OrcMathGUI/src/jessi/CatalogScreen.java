@@ -34,6 +34,7 @@ public class CatalogScreen extends FullFunctionScreen implements FileRequester {
 		viewObjects.add(name);
 		price = new TextField(40, 140, 200, 30, "insert price", "price");
 		viewObjects.add(price);
+		//TextField.INPUT_TYPE_NUMERIC;
 		
 		text = new TextArea(40, 180, 200, 30, "contents");
 		viewObjects.add(text);
@@ -70,7 +71,8 @@ public class CatalogScreen extends FullFunctionScreen implements FileRequester {
 	}
 
 	protected void addClick() {
-		text.setText("add button clicked");
+		CandyBars = new CandyBars(descriptionBox.getText(), name.getText(), price.getText());
+		text.setText("");
 	}
 	
 	protected void saveClick() {
