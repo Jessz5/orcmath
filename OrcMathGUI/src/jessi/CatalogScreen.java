@@ -9,6 +9,8 @@ import guiTeacher.components.*;
 import guiTeacher.interfaces.FileRequester;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
+////import jessi.CatalogMaker;
+//import jessi.CandyBars;
 
 public class CatalogScreen extends FullFunctionScreen implements FileRequester {
 
@@ -33,59 +35,59 @@ public class CatalogScreen extends FullFunctionScreen implements FileRequester {
 		price = new TextField(40, 140, 200, 30, "insert price", "price");
 		viewObjects.add(price);
 		price.setInputType(TextField.INPUT_TYPE_NUMERIC);
-		list = new TextArea(40, 200, 200, 30, "Candy Bars List");
+		list = new TextArea(320, 300, 100, 100, "List");
 		viewObjects.add(list);
 		
-		text = new TextArea(40, 40, 200, 30, "contents");
+		text = new TextArea(40, 200, 200, 30, "contents");
 		viewObjects.add(text);
 		
-		addButton = new Button(40, 210, 200, 30, "Add", new Action() {
+		addButton = new Button(600, 90, 40, 40, "Add", new Action() {
 			
 			@Override
 			public void act() {
-				addClick();
+				addClicked("Added");
+				
 			}
-		});
+		} );
 		viewObjects.add(addButton);
-		
-		saveButton = new Button(40, 230, 200, 30, "Save", new Action() {
-
+		saveButton = new Button(600, 120, 40, 40, "Save", new Action() {
+			
 			@Override
 			public void act() {
-				saveClick();
+				saveClicked("Saved");
+				
 			}
 		});
 		viewObjects.add(saveButton);
-		
-		deleteButton = new Button(40, 250, 200, 30, "Delete", new Action() {
-
+		deleteButton = new Button(600, 150, 40,40, "Delete", new Action() {
+			
 			@Override
 			public void act() {
-				deleteClick();
+				deleteClicked("Deleted");
+				
 			}
-		});
+		} );
 		viewObjects.add(deleteButton);
-		
-		openButton = new FileOpenButton(40, 280, 200, 30, null, this);
+		openButton = new FileOpenButton(600, 180, 40, 40, null, this);
 		viewObjects.add(openButton);
-		
 		catalog = new CatalogMaker();
-	}
-	
-	protected void deleteClick() {
-		text.setText("");
+		}
+
+	protected void deleteClicked(String string) {
+		text.setText(string);
 		
 	}
 
-	protected void saveClick() {
-		text.setText("");
+	protected void saveClicked(String string) {
+		text.setText(string);
 		
 	}
 
-	protected void addClick() {
-		CandyBars a = new CandyBars(name.getText(), Integer.parseInt(price.getText()));
-		catalog.addCandyBars(a);
+	protected void addClicked(String s) {
+		catalog.addCandyBars(new CandyBars(name.getText(), Integer.parseInt(price.getText())));
+		text.setText(s);
 		list.setText(catalog.getCSVContent());
+		
 		name.setText("");
 		price.setText("");
 	}	
