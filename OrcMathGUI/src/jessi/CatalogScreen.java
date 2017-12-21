@@ -11,16 +11,16 @@ import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 
 public class CatalogScreen extends FullFunctionScreen implements FileRequester {
-	
-	private TextField descriptionBox;
+
 	private TextField name;
 	private TextField price;
 	private TextArea text;
+	private TextArea list;
 	private Button addButton;
 	private Button saveButton;
 	private Button deleteButton;
 	private FileOpenButton openButton;
-	private Catalog catalog;
+	private CatalogMaker catalog;
 
 	public CatalogScreen(int width, int height) {
 		super(width, height);
@@ -28,18 +28,18 @@ public class CatalogScreen extends FullFunctionScreen implements FileRequester {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		descriptionBox = new TextField(40, 40, 200, 30, "insert text", "description");
-		viewObjects.add(descriptionBox);
 		name = new TextField(40, 90, 200, 30, "insert name", "name");
 		viewObjects.add(name);
 		price = new TextField(40, 140, 200, 30, "insert price", "price");
 		viewObjects.add(price);
-		//TextField.INPUT_TYPE_NUMERIC;
+		price.setInputType(TextField.INPUT_TYPE_NUMERIC);
+		list = new TextArea(40, 200, 200, 30, "Candy Bars List");
+		viewObjects.add(list);
 		
-		text = new TextArea(40, 180, 200, 30, "contents");
+		text = new TextArea(40, 40, 200, 30, "contents");
 		viewObjects.add(text);
 		
-		addButton = new Button(40, 210, 200, 30, "add", new Action() {
+		addButton = new Button(40, 210, 200, 30, "Add", new Action() {
 			
 			@Override
 			public void act() {
@@ -47,7 +47,8 @@ public class CatalogScreen extends FullFunctionScreen implements FileRequester {
 			}
 		});
 		viewObjects.add(addButton);
-		saveButton = new Button(40, 230, 200, 30, "save", new Action() {
+		
+		saveButton = new Button(40, 230, 200, 30, "Save", new Action() {
 
 			@Override
 			public void act() {
@@ -55,7 +56,8 @@ public class CatalogScreen extends FullFunctionScreen implements FileRequester {
 			}
 		});
 		viewObjects.add(saveButton);
-		deleteButton = new Button(40, 250, 200, 30, "delete", new Action() {
+		
+		deleteButton = new Button(40, 250, 200, 30, "Delete", new Action() {
 
 			@Override
 			public void act() {
@@ -67,22 +69,27 @@ public class CatalogScreen extends FullFunctionScreen implements FileRequester {
 		openButton = new FileOpenButton(40, 280, 200, 30, null, this);
 		viewObjects.add(openButton);
 		
-		catalog = new Catalog();
-	}
-
-	protected void addClick() {
-		CandyBars = new CandyBars(descriptionBox.getText(), name.getText(), price.getText());
-		text.setText("");
-	}
-	
-	protected void saveClick() {
-		text.setText("save button clicked");
+		catalog = new CatalogMaker();
 	}
 	
 	protected void deleteClick() {
-		text.setText("delete button clicked");
+		text.setText("");
+		
 	}
 
+	protected void saveClick() {
+		text.setText("");
+		
+	}
+
+	protected void addClick() {
+		CandyBars a = new CandyBars(name.getText(), Integer.parseInt(price.getText()));
+		catalog.addCandyBars(a);
+		list.setText(catalog.getCSVContent());
+		name.setText("");
+		price.setText("");
+	}	
+	
 	@Override
 	public void setFile(File f) {
 		// TODO Auto-generated method stub
