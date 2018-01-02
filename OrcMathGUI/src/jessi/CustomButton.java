@@ -11,7 +11,7 @@ public class CustomButton extends Button {
 	private String s2;
 
 	public CustomButton(int x, int y) {
-		super(x, y, w, h, text, null);
+		super(x, y, text, null);
 		// TODO Auto-generated constructor stub
 	}
 	
