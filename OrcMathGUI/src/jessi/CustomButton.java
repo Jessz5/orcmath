@@ -7,23 +7,35 @@ import guiTeacher.components.Action;
 import guiTeacher.components.Button;
 
 public class CustomButton extends Button {
+	
 	private String s1;
 	private String s2;
+	private Color color;
 
 	public CustomButton(int x, int y) {
-		super(x, y, text, null);
-		// TODO Auto-generated constructor stub
+		super(x, y, 40, 80, "", null);
 	}
 	
-	public void drawButton(Graphics2D g, boolean hover) {
+	public void drawButton(Graphics2D g, boolean hover){
 		g.setColor(Color.black);
-		g.drawString(s1, 20, 20);
-		g.drawString(s2, 20, 30);
+		g.drawString(s1, 40, 40);
+		g.drawString(s2, 60, 40);
 		
-		g.setColor(Color.red);
-		g.drawRect(20, 20, 40, 50);
+		g.setColor(color);
+		g.drawRect(80, 40, 100, 150);
+		
 	}
 	
-	public void 
+	public void updateString1(String string){
+		s1 = string;
+	}
+
+	public void updateString2(String string){
+		s2 = string;
+	}
+
+	public void setIconColor(Color color){
+		this.color = color;
+	}
 
 }
