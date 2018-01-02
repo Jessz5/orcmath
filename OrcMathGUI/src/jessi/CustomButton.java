@@ -18,11 +18,11 @@ public class CustomButton extends Button {
 	
 	public void drawButton(Graphics2D g, boolean hover){
 		g.setColor(Color.black);
-		g.drawString(s1, 40, 40);
-		g.drawString(s2, 60, 40);
+		g.drawString(s1, 20, 20);
+		g.drawString(s2, 30, 30);
 		
 		g.setColor(color);
-		g.drawRect(80, 40, 100, 150);
+		g.drawRect(20, 50, 100, 200);
 		
 	}
 	
