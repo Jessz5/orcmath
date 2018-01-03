@@ -10,7 +10,7 @@ import guiTeacher.userInterfaces.ClickableScreen;
 public class SimonScreen extends ClickableScreen implements Runnable {
 	
 	private TextLabel label;
-	private ButtonInterface buttons;
+	private ButtonInterface[] buttons;
 	private ProgressInterface progress;
 	private ArrayList<MoveInterface> seq;
 	private int roundNumber;
