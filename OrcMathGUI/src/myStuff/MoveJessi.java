@@ -4,8 +4,8 @@ public class MoveJessi implements MoveInterfaceJessi {
 
 	private ButtonInterfaceJessi button;
 	
-	public MoveJessi(ButtonInterfaceJessi button) {
-		this.button = button;
+	public MoveJessi(ButtonInterfaceJessi bIndex) {
+		this.button = bIndex;
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 	private ButtonInterfaceJessi[] buttons;
 	private ProgressInterfaceJessi progress;
 	private ArrayList<MoveInterfaceJessi> sequence;
-	private int roundNumber;
+	private int roundNumber = 0;
 	private boolean acceptingInput;
 	private int sequenceIndex;
 	private int lastSelectedButton;
@@ -35,14 +35,13 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 	private void nextRound() {
 		acceptingInput = false;
 		roundNumber++;
-		MoveInterfaceJessi move = randomMove();
-		sequence.add(move);
+		sequence.add(randomMove());
 		progress.setRound(roundNumber);
 		progress.setSequenceSize(sequence.size());
-		changeText("Simon's turn");
+		changeText("Simon's Turn");
 		label.setText("");
 		playSequence();
-		changeText("Your turn");
+		changeText("Your Turn");
 		acceptingInput = true;
 		sequenceIndex = 0;
 	}
@@ -52,18 +51,17 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 		for(int i = 0; i < sequence.size(); i++) {
 			if(b != null) {
 				b.dim();
-				b = sequence.get(i).getButton();
-				b.highlight();
-				int sleepTime = (10000 - (roundNumber * 100)) + 1000;
-				try {
-					Thread.sleep(sleepTime);
-				}catch(InterruptedException e){
-					e.printStackTrace();
-				}
-				b.dim();
+			}
+			b = sequence.get(i).getButton();
+			b.highlight();
+			int sleepTime = (1000 - (roundNumber * 100)) + 100;
+			try {
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
-		
+		b.dim();
 	}
 
 	private void changeText(String string) {
@@ -73,7 +71,7 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 		}catch(InterruptedException e){
 			e.printStackTrace();
 		}
-		
+		label.setText("");
 	}
 
 	@Override
@@ -99,7 +97,7 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 	Placeholder until partner finishes implementation of ProgressInterface
 	*/
 	private ProgressInterfaceJessi getProcess() {
-		return new ProgressJessi(10,10,10,10);
+		return new ProgressJessi(0,0,800,200);
 	}
 
 	private MoveInterfaceJessi randomMove() {
@@ -133,38 +131,40 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 				@Override
 				public void act() {
 					if(acceptingInput) {
-						Thread blink = new Thread(new Runnable() {
-							
-							@Override
-							public void run() {
-								b.highlight();
-								try {
-									Thread.sleep(800);
-									} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-									}
-									b.dim();
-							}
-						});
-						blink.start();
-						if(b == sequence.get(sequenceIndex).getButton()) {
-							sequenceIndex++;
-						}else {
-							progress.gameOver();
-						}
-					}
-					if(sequenceIndex == sequence.size()){ 
-					    Thread nextRound = new Thread(SimonScreenJessi.this); 
-					    nextRound.start(); 
-					}
-				}
-			});
+		    		    Thread blink = new Thread(new Runnable(){
+		    		        public void run(){
+		    		        	b.highlight();
+		    		            try {
+		    		                Thread.sleep(800);
+		    		            } catch (InterruptedException e) {
+		    		                e.printStackTrace();
+		    		            }
+		    		            b.dim();
+		    		        }
+		    		    });
+		    		    blink.start();
+		    		    if(b == sequence.get(sequenceIndex).getButton()) {
+		    		    	sequenceIndex++;
+		    		    	if(sequenceIndex == sequence.size()){
+			    		        Thread nextRound = new Thread(SimonScreenJessi.this);
+			    		        nextRound.start();
+			    		    }
+		    		    }
+		    		    else {
+		    		    	progress.gameOver();
+		    		    	for(int i = 0; i < buttons.length; i++) {
+		    					buttons[i].setAction(null);
+		    				}
+		    		    }
+		    		}
+		    	}
+		    });
+		    buttons[i] = b;
 		}
 	}
 
 	private ButtonInterfaceJessi getAButton() {
-		return new ButtonJessi(10,10,50,50,"",null);
+		return new ButtonJessi(0,0,50,50,"",null);
 	}
 
 	

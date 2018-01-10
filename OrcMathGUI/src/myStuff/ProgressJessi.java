@@ -7,52 +7,46 @@ import guiTeacher.components.Component;
 
 public class ProgressJessi extends Component implements ProgressInterfaceJessi{
 
-
 	private int round;
-	private boolean game;
-	private int seq;
-	private int x;
-	private int y;
+	private int sequenceSize;
+	private boolean progress;
 	
 	public ProgressJessi(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		game=true;
-		round=1;
-		seq=1;
-		this.x=x;
-		this.y=y;
+		progress = true;
 		update();
 	}
 
 	@Override
 	public void gameOver() {
-		game=false;
-		update();
-
-	}
-
-	@Override
-	public void setRound(int i) {
-		round=i;
+		progress = false;
 		update();
 	}
 
 	@Override
-	public void setSequenceSize(int i) {
-		seq=i;
+	public void setRound(int roundNumber) {
+		round = roundNumber;
+		update();
+	}
+
+	@Override
+	public void setSequenceSize(int size) {
+		sequenceSize = size;
 		update();
 	}
 
 	@Override
 	public void update(Graphics2D g) {
 		clear();
-		if(game) {
+		if(progress) {
 			g.setColor(Color.black);
-			g.drawString("Round: "+round, x, y);
-			g.drawString("Sequence: "+seq,x, y+20);
+			g.drawString("Round: "+round, 600, 50);
+			g.drawString("Sequence: "+sequenceSize,600,100);
 		}else {
 			g.setColor(Color.black);
-			g.drawString("Game over", x, y);
+			g.drawString("Game over", 600, 50);
+			g.drawString("Round: "+round, 600, 100);
+			g.drawString("Sequence: "+sequenceSize,600,150);
 		}
 
 	}
