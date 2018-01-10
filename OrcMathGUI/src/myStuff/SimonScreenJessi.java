@@ -99,8 +99,7 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 	Placeholder until partner finishes implementation of ProgressInterface
 	*/
 	private ProgressInterfaceJessi getProcess() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ProgressJessi(10,10,10,10);
 	}
 
 	private MoveInterfaceJessi randomMove() {
@@ -116,8 +115,7 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 	Placeholder until partner finishes implementation of MoveInterface
 	*/
 	private MoveInterfaceJessi getMove(int bIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		return new MoveJessi(buttons[bIndex]);
 	}
 
 	private void addButtons() {
@@ -128,8 +126,8 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 			final ButtonInterfaceJessi b = getAButton();
 			buttons[i] = b;
 			b.setColor(colors[i]);
-			b.setX(i+10);
-			b.setY(i+10);
+			b.setX(60+60*i);
+			b.setY(60);
 			b.setAction(new Action() {
 				
 				@Override
@@ -166,8 +164,7 @@ public class SimonScreenJessi extends ClickableScreen implements Runnable {
 	}
 
 	private ButtonInterfaceJessi getAButton() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ButtonJessi(10,10,50,50,"",null);
 	}
 
 	
